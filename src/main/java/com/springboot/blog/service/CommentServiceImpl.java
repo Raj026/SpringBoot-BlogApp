@@ -7,6 +7,7 @@ import com.springboot.blog.exception.ResourceNotFoundException;
 import com.springboot.blog.payload.CommentDto;
 import com.springboot.blog.repository.CommentRepository;
 import com.springboot.blog.repository.PostRepository;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -16,6 +17,8 @@ import java.util.stream.Collectors;
 
 @Service
 public class CommentServiceImpl implements CommentService{
+    @Autowired
+    private ModelMapper modelMapper;
     @Autowired
     private CommentRepository commentRepository;
     @Autowired
@@ -101,18 +104,18 @@ public class CommentServiceImpl implements CommentService{
     }
 
     private CommentDto mapToDto(Comment comment) {
-        CommentDto commentDto = new CommentDto();
-        commentDto.setBody(comment.getBody());
-        commentDto.setName(comment.getName());
-        commentDto.setEmail(comment.getEmail());
-        return commentDto;
+//        CommentDto commentDto = new CommentDto();
+//        commentDto.setBody(comment.getBody());
+//        commentDto.setName(comment.getName());
+//        commentDto.setEmail(comment.getEmail());
+        return modelMapper.map(comment, CommentDto.class);
     }
 
     private Comment mapToEntity(CommentDto commentDto) {
-        Comment comment = new Comment();
-        comment.setBody(commentDto.getBody());
-        comment.setEmail(commentDto.getEmail());
-        comment.setName(commentDto.getName());
-        return comment;
+//        Comment comment = new Comment();
+//        comment.setBody(commentDto.getBody());
+//        comment.setEmail(commentDto.getEmail());
+//        comment.setName(commentDto.getName());
+        return modelMapper.map(commentDto, Comment.class);
     }
 }

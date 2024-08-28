@@ -1,13 +1,13 @@
 package com.springboot.blog.entity;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.HashSet;
 import java.util.Set;
 
-@Data
+@Getter
+@Setter
+//We Removed the Data annotation as it was throwing the toString error while model-mapping with the DTO.
 @AllArgsConstructor
 @NoArgsConstructor
 
