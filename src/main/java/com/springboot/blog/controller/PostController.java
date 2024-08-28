@@ -9,6 +9,7 @@ import org.apache.coyote.Request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,6 +21,7 @@ public class PostController {
     private PostService postService;
 
     //Create a Blog Post
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
     public ResponseEntity<PostDto> createPost(@Valid @RequestBody PostDto postDto){
         return new ResponseEntity<>(postService.createPost(postDto), HttpStatus.CREATED);
@@ -44,12 +46,15 @@ public class PostController {
     }
 
     //Update the Post By Id
+    @PreAuthorize("hasRole('ADMIN')")
+    //This update post can only be accessed by the ADMIN roles.
     @PutMapping("/{id}")
     public ResponseEntity<PostDto> updatePostById(@Valid @RequestBody PostDto postDto, @PathVariable("id") Long id) {
         return new ResponseEntity<>(postService.updatePostById(postDto, id), HttpStatus.OK);
     }
 
     //Delete the Post By Id
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deletePostById(@PathVariable("id") Long id) {
         return new ResponseEntity<>(postService.deletePostById(id), HttpStatus.OK);
