@@ -1,9 +1,12 @@
 package com.springboot.blog.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.userdetails.User;
@@ -19,6 +22,16 @@ import java.net.http.HttpRequest;
 @Configuration // This annotation is used to make the Java based configuration adn within this beans can be created.
 @EnableMethodSecurity //This annotation is used to enable the method level security.
 public class SecurityConfig {
+    @Autowired
+    private UserDetailsService userDetailsService;
+
+    //this auth. manager will use the userdetails service to get the user from the database.
+    @Bean
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {
+        return configuration.getAuthenticationManager();
+    }
+
+
     @Bean
     public static PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -38,21 +51,21 @@ public class SecurityConfig {
         return http.build();
     }
 
-    @Bean
-    //IN memory Authentication based on roles.
-    public UserDetailsService userDetailsService() {
-        UserDetails raj = User.builder()
-                .username("raj")
-                .password(passwordEncoder().encode("555"))
-                .roles("USER")
-                .build();
-
-        UserDetails admin = User.builder()
-                .username("admin")
-                .password(passwordEncoder().encode("admin"))
-                .roles("ADMIN")
-                .build();
-
-        return new InMemoryUserDetailsManager(raj, admin);
-    }
+//    @Bean
+//    //IN memory Authentication based on roles.
+//    public UserDetailsService userDetailsService() {
+//        UserDetails raj = User.builder()
+//                .username("raj")
+//                .password(passwordEncoder().encode("555"))
+//                .roles("USER")
+//                .build();
+//
+//        UserDetails admin = User.builder()
+//                .username("admin")
+//                .password(passwordEncoder().encode("admin"))
+//                .roles("ADMIN")
+//                .build();
+//
+//        return new InMemoryUserDetailsManager(raj, admin);
+//    }
 }
