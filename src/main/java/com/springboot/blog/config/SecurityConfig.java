@@ -43,7 +43,9 @@ public class SecurityConfig {
 //                csrf.disable().authorizeHttpRequests((authorize) -> authorize.anyRequest().authenticated()).httpBasic(Customizer.withDefaults());
                 // Here we permitted all the users to access the GET methods of REST API
                 csrf.disable().authorizeHttpRequests((authorize) -> authorize.requestMatchers(HttpMethod.GET, "/api/**")
-                        .permitAll().anyRequest().authenticated()).httpBasic(Customizer.withDefaults());
+                        .permitAll()
+                        .requestMatchers("/api/auth/**").permitAll()
+                        .anyRequest().authenticated()).httpBasic(Customizer.withDefaults());
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }

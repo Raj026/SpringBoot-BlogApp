@@ -29,7 +29,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(BlogApiException.class)
     public ResponseEntity<ErrorDetails> handleResourceNotFoundException(BlogApiException blogApiException, WebRequest webRequest) {
         ErrorDetails errorDetails = new ErrorDetails(new Date(), blogApiException.getMessage(), webRequest.getDescription(false));
-        return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(errorDetails, HttpStatus.OK);
     }
 
     // handle global exception
