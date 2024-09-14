@@ -60,6 +60,7 @@ public class SecurityConfig {
                 csrf.disable().authorizeHttpRequests((authorize) -> authorize.requestMatchers(HttpMethod.GET, "/api/**")
                         .permitAll()
                         .requestMatchers("/api/auth/**").permitAll()
+//                        .requestMatchers(HttpMethod.GET, "/api/categories/**").permitAll()
                         .anyRequest().authenticated()).exceptionHandling(exception -> exception.authenticationEntryPoint(authenticationEntryPoint))
                         .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
             } catch (Exception e) {
