@@ -15,4 +15,6 @@ public interface PostService {
     PostDto updatePostById(PostDto postDto,Long id);
 
     String deletePostById(Long id);
+
+    List<PostDto> getPostsByCategory(Long categoryId);
 }

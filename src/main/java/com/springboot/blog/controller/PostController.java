@@ -59,4 +59,10 @@ public class PostController {
     public ResponseEntity<String> deletePostById(@PathVariable("id") Long id) {
         return new ResponseEntity<>(postService.deletePostById(id), HttpStatus.OK);
     }
+
+    //Build REST API to get the posts by category
+    @GetMapping("/category/{id}")
+    public ResponseEntity<List<PostDto>> getPostsByCategory(@PathVariable("id") Long categoryId) {
+        return new ResponseEntity<>(postService.getPostsByCategory(categoryId), HttpStatus.OK);
+    }
 }
