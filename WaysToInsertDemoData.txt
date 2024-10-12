@@ -1,0 +1,3 @@
+=> 1st way is to make data.sql and schema.sql file in the resources file, as a result when the springboot application is started the script will be executed.
+
+=> 2nd way is to we can use runners
