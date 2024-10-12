@@ -1,0 +1,11 @@
+1). EC2 service - It stands for Elastic compute cloud (Virtual Server)
+
+2). Elastic Beanstalk Service is an easy to use service for deploying and scaling web applications and services developed in different languages.
+
+3). For deploying the java application on the AWS. we need to create an instance of the EC2 server primarily after which we need to install the webserver like Tomcat and JAVA.
+
+4). RDS stands for Relational Database Service.
+
+5). S3 service stands for Simple Storage Service , it allows user to have scalable storage service. Retrieve any amount of data from anywhere.
+
+6). Amazon Route 53- in order to configure the domain of your application , you need to use the Route service.
